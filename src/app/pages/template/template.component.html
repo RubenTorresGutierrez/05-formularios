@@ -1,6 +1,6 @@
 <h4>Formularios <small> template </small></h4>
 <hr>
-<form autocomplete="off">
+<form autocomplete="off" (ngSubmit)="guardar(forma)" #forma="ngForm">
 
   <div>
 
@@ -10,7 +10,9 @@
 
         <input class="form-control"
                type="text"
-               placeholder="Nombre" [ngModel] = "nombre" name="nombre" >
+               placeholder="Nombre" [ngModel]="usuario.nombre.value" #nombre="ngModel"
+               name="nombre" [required]="true" [class.is-invalid]="nombre.invalid && nombre.touched" minlength="{{ usuario.nombre.length }}">
+        <small class="form-text text-danger" *ngIf="nombre.invalid && nombre.touched">Debe contener al menos {{ usuario.nombre.length }} caracteres</small>
       </div>
     </div>
 
@@ -19,8 +21,10 @@
       <div class="col-8">
 
         <input class="form-control"
-               type="text"
-               placeholder="Apellido">
+               type="text" name="apellido"
+               placeholder="Apellido" [ngModel]="usuario.apellido.value" #apellido="ngModel"
+               [required]="true" [class.is-invalid]="apellido.invalid && apellido.touched" minlength="{{ usuario.apellido.length }}">
+        <small class="form-text text-danger" *ngIf="apellido.invalid && apellido.touched">Debe contener al menos {{ usuario.apellido.length }} caracteres</small>
       </div>
     </div>
 
@@ -31,8 +35,10 @@
     <div class="col-8">
 
       <input class="form-control"
-             type="email"
-             placeholder="Correo electrónico">
+             type="email" name="correo"
+             placeholder="Correo electrónico" [ngModel]="usuario.correo" #correo="ngModel"
+             [required]="true" [class.is-invalid]="correo.invalid && correo.touched" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+      <small class="form-text text-danger" *ngIf="correo.invalid && correo.touched">Ajustese al formato de correo</small>
     </div>
   </div>
 
