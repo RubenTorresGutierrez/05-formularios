@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class TemplateComponent implements OnInit {
-
-  constructor() { }
+  nombre:string;
+  constructor() {
+    this.nombre="";
+  }
 
   ngOnInit(): void {
   }
