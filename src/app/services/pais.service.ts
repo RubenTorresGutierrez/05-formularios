@@ -10,7 +10,7 @@ export class PaisService {
 
   getPaises(){
 
-    return this.http.get('https://restcountries.eu/rest/v2/lang/es');
+    return this.http.get('https://restcountries.com/v2/lang/es');
 
   }
 

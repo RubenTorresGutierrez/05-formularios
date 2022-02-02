@@ -20,17 +20,28 @@ export class TemplateComponent implements OnInit {
       value: "",
       length: 5
     },
-    correo: ""
+    correo: "",
+    pais:""
   }
+  paises:any[] = [];
+
 
   constructor(private paisService: PaisService) { }
 
   ngOnInit(): void {
-
+    this.paises.unshift({
+      name: 'Seleccione el país',
+      alpha3Code: ''
+    });
     this.paisService.getPaises()
-      .subscribe(paises => {
+      .subscribe((paises:any) => {
         console.log(paises);
+        for ( let i=0; i<paises.length;i++) {
+          this.paises.push(paises[i]);
+        }
       })
+
+
 
   }
 
