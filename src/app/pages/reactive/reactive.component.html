@@ -1,6 +1,6 @@
 <h4>Formularios <small> reactivo </small></h4>
 <hr>
-<form autocomplete="off">
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
 
   <div>
 
@@ -10,7 +10,9 @@
 
         <input class="form-control"
                type="text"
-               placeholder="Nombre">
+               placeholder="Nombre"
+               formControlName="nombre"
+               [class.is-invalid]="!nombreValido"><small *ngIf="!nombreValido" class="text-danger">Debe introducir al menos 5 letras</small>
       </div>
     </div>
 
@@ -20,7 +22,8 @@
 
         <input class="form-control"
                type="text"
-               placeholder="Apellido">
+               placeholder="Apellido"
+               formControlName="apellido">
       </div>
     </div>
 
@@ -32,7 +35,8 @@
 
       <input class="form-control"
              type="email"
-             placeholder="Correo electrónico">
+             placeholder="Correo electrónico"
+             formControlName="email">
     </div>
   </div>
 
@@ -48,3 +52,12 @@
   </div>
 
 </form>
+
+<hr />
+<pre>
+  Formulario válido: {{ forma.valid }}
+  Status: {{ forma.status }}
+  <hr />
+  {{ forma.value | json }}
+</pre>
+
