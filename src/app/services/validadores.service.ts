@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidadoresService {
 
-  constructor() { }
 
-  noApellido(control: FormControl): { [s: string]: boolean } | null {
+
+
+constructor() { }
+
+  noApellido(control: FormControl): errorValidate | null {
     if (control.value?.toLowerCase() === "apellido") {
       return {
         noApellido: true
@@ -30,4 +34,18 @@ export class ValidadoresService {
     }
   }
 
+  existeUsuario(control:FormControl): Promise<errorValidate> | Observable<errorValidate> {
+    return new Promise( (resolve, reject) => {
+      setTimeout(() =>{
+        if (control.value === "NOMBRE") resolve({ existe: true })
+      }, 2000);
+      console.log('hola');
+    });
+  }
+
+
+}
+
+export interface errorValidate {
+  [s:string]:boolean
 }
