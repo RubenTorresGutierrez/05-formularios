@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import {ValidadoresService} from "../../services/validadores.service";
 
 @Component({
   selector: 'app-reactive',
@@ -12,7 +13,7 @@ export class ReactiveComponent implements OnInit {
   // Atributtes
   forma!:FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private _validadoresService:ValidadoresService) {
 
     this.crearFormulario()
     this.cargarDatosFormulario()
@@ -28,12 +29,19 @@ export class ReactiveComponent implements OnInit {
       nombre:['',[Validators.required, Validators.minLength(5)]],
       apellido:['',[Validators.required, Validators.minLength(5)]],
       email:['',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+      passwords:this.formBuilder.group({
+        pass1:['',Validators.required],
+        pass2:['',Validators.required]
+      }),
       direccion: this.formBuilder.group({
         distrito:['',Validators.required],
         ciudad:['',Validators.required]
       }),
       pasatiempos: this.formBuilder.array([])
+    }, {
+      validators:this._validadoresService.passwordsIguales('passwords.pass1', 'passwords.pass2')
     })
+
 
   }
 
@@ -72,11 +80,20 @@ export class ReactiveComponent implements OnInit {
 
   validar(campo1: string){
     let campo: any = this.forma.get(campo1);
+    if (campo1 == 'apellido' && this._validadoresService.noApellido(campo)){
+      return false;
+    }
     return !(campo.invalid && campo.touched);
   }
 
   get pasatiempos() {
     return this.forma.get('pasatiempos') as FormArray;
+  }
+
+  get pass2Valido() {
+    let pass1 = this.forma.get('passwords.pass1')?.value;
+    let pass2 = this.forma.get('passwords.pass2')?.value;
+    return (pass1 === pass2) ? true : false;
   }
 
 

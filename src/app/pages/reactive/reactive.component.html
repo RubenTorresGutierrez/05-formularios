@@ -44,7 +44,30 @@
       <small *ngIf="!validar('email')" class="text-danger">Ajústese al formato de correo</small>
     </div>
   </div>
+  <hr>
+  <!--CONTRASEÑA-->
+    <div class="form-group row" formGroupName="passwords">
+      <label class="col-2 col-form-label">Contraseña</label>
+      <div class="form-row col-8 pr-1">
+        <div class="col">
+          <input type="password"
+                 class="form-control"
+                 placeholder="Contraseña"
+                 formControlName="pass1"
+                 [class.is-invalid]="!validar('passwords.pass1')">
 
+        </div>
+        <div class="col">
+          <input type="password"
+                 class="form-control"
+                 placeholder="Repetir contraseña"
+                 formControlName="pass2"
+                 [class.is-invalid]="!pass2Valido ||!validar('passwords.pass2')">
+          <small *ngIf="!pass2Valido" class="text-danger">Las contraseñas no coinciden.</small>
+        </div>
+      </div>
+    </div>
+  <hr>
   <!--DIRECCIÓN-->
   <div class="form-group row" formGroupName="direccion">
     <label class="col-2 col-form-label">Dirección</label>
