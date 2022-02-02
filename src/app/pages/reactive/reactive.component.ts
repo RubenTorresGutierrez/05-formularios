@@ -29,7 +29,7 @@ export class ReactiveComponent implements OnInit {
       nombre:['',[Validators.required, Validators.minLength(5)]],
       apellido:['',[Validators.required, Validators.minLength(5)]],
       email:['',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
-      passwords:this.formBuilder.group({
+      passwords: this.formBuilder.group({
         pass1:['',Validators.required],
         pass2:['',Validators.required]
       }),
@@ -39,7 +39,7 @@ export class ReactiveComponent implements OnInit {
       }),
       pasatiempos: this.formBuilder.array([])
     }, {
-      validators:this._validadoresService.passwordsIguales('passwords.pass1', 'passwords.pass2')
+      validators:this._validadoresService.passwordsIguales('pass1', 'pass2')
     })
 
 
@@ -64,6 +64,7 @@ export class ReactiveComponent implements OnInit {
     });
       ['comer', 'dormir'].forEach(valor => this.pasatiempos.push(this.formBuilder.control(valor)));
   }
+
   agregarPasatiempo()
   {
     this.pasatiempos.push(this.formBuilder.control(' ', Validators.required));

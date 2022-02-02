@@ -16,11 +16,13 @@ export class ValidadoresService {
     }
     return null;
   }
+
   passwordsIguales(pass1:string, pass2:string){
     return (formGroup:FormGroup) =>{
-      const pass1control = formGroup.controls[pass1];
-      const pass2control = formGroup.controls[pass2];
-      if (pass1control?.value === pass2control?.value) {
+      const passwords: any = formGroup.controls['passwords'];
+      const pass1control = passwords.controls[pass1];
+      const pass2control = passwords.controls[pass2];
+      if (pass1control?.value == pass2control?.value) {
         pass2control?.setErrors(null);
       }
       else
