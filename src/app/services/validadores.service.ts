@@ -7,10 +7,7 @@ import {Observable} from "rxjs";
 })
 export class ValidadoresService {
 
-
-
-
-constructor() { }
+  constructor() { }
 
   noApellido(control: FormControl): errorValidate | null {
     if (control.value?.toLowerCase() === "apellido") {
@@ -34,12 +31,13 @@ constructor() { }
     }
   }
 
-  existeUsuario(control:FormControl): Promise<errorValidate> | Observable<errorValidate> {
+  existeUsuario(control:FormControl): Promise<errorValidate | null> | Observable<errorValidate> {
     return new Promise( (resolve, reject) => {
       setTimeout(() =>{
-        if (control.value === "NOMBRE") resolve({ existe: true })
+        if (control.value === "NOMBRE")
+          resolve({ existe: true })
+        resolve(null)
       }, 2000);
-      console.log('hola');
     });
   }
 
@@ -47,5 +45,7 @@ constructor() { }
 }
 
 export interface errorValidate {
+
   [s:string]:boolean
+
 }
