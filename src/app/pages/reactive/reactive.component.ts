@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-reactive',
@@ -31,7 +31,8 @@ export class ReactiveComponent implements OnInit {
       direccion: this.formBuilder.group({
         distrito:['',Validators.required],
         ciudad:['',Validators.required]
-      })
+      }),
+      pasatiempos: this.formBuilder.array([])
     })
 
   }
@@ -46,22 +47,25 @@ export class ReactiveComponent implements OnInit {
       })
       return;
     }
-
+    this.forma.reset();
   }
 
   cargarDatosFormulario()  {
-
-    this.forma.setValue({
-      nombre: "kjhlk",
-      apellido: "lkjlkj",
-      email: "ñlkñl",
-      direccion: {
-        distrito: "ñlkñl",
-        ciudad: "ñlkñkl"
-      }
-    })
-
+    this.forma.reset({
+      nombre: "sin nombre"
+    });
+      ['comer', 'dormir'].forEach(valor => this.pasatiempos.push(this.formBuilder.control(valor)));
   }
+  agregarPasatiempo()
+  {
+    this.pasatiempos.push(this.formBuilder.control(' ', Validators.required));
+  }
+
+  borrarPasatiempo(index: number)
+  {
+    this.pasatiempos.removeAt(index);
+  }
+
 
 
   // GETTERS
@@ -69,6 +73,10 @@ export class ReactiveComponent implements OnInit {
   validar(campo1: string){
     let campo: any = this.forma.get(campo1);
     return !(campo.invalid && campo.touched);
+  }
+
+  get pasatiempos() {
+    return this.forma.get('pasatiempos') as FormArray;
   }
 
 
