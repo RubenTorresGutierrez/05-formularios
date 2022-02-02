@@ -1,9 +1,10 @@
 <h4>Formularios <small> reactivo </small></h4>
 <hr>
-<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar(forma)">
 
   <div>
 
+    <!--NOMBRE-->
     <div class="form-group row">
       <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
@@ -12,36 +13,63 @@
                type="text"
                placeholder="Nombre"
                formControlName="nombre"
-               [class.is-invalid]="!nombreValido"><small *ngIf="!nombreValido" class="text-danger">Debe introducir al menos 5 letras</small>
+               [class.is-invalid]="!validar('nombre')">
+        <small *ngIf="!validar('nombre')" class="text-danger">Debe introducir al menos 5 letras</small>
       </div>
     </div>
 
+    <!--APELLIDO-->
     <div class="form-group row">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
-
         <input class="form-control"
                type="text"
                placeholder="Apellido"
-               formControlName="apellido">
+               formControlName="apellido"
+               [class.is-invalid]="!validar('apellido')">
+        <small *ngIf="!validar('apellido')" class="text-danger">Debe introducir al menos 5 letras</small>
       </div>
     </div>
-
   </div>
 
+  <!--CORREO-->
   <div class="form-group row">
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-8">
-
       <input class="form-control"
              type="email"
              placeholder="Correo electrónico"
-             formControlName="email">
+             formControlName="email"
+             [class.is-invalid]="!validar('email')">
+      <small *ngIf="!validar('email')" class="text-danger">Ajústese al formato de correo</small>
+    </div>
+  </div>
+
+  <!--DIRECCIÓN-->
+  <div class="form-group row" formGroupName="direccion">
+    <label class="col-2 col-form-label">Dirección</label>
+    <div class="form-row col-8 pr-1">
+      <div class="col">
+        <input type="text"
+               class="form-control"
+               placeholder="Distrito"
+               formControlName="distrito"
+               [class.is-invalid]="!validar('direccion.distrito')">
+        <small *ngIf="!validar('direccion.distrito')" class="text-danger">Ajústese al formato</small>
+      </div>
+      <div class="col">
+        <input type="text"
+               class="form-control"
+               placeholder="Ciudad"
+               formControlName="ciudad"
+               [class.is-invalid]="!validar('direccion.ciudad')">
+        <small *ngIf="!validar('direccion.ciudad')" class="text-danger">Ajústese al formato</small>
+      </div>
     </div>
   </div>
 
 
-
+  <!--VALIDACIÓN-->
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
