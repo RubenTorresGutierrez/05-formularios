@@ -10,7 +10,6 @@ import {ValidadoresService} from "../../services/validadores.service";
 })
 export class ReactiveComponent implements OnInit {
 
-  @Output() evento = new EventEmitter<boolean>();
   // Atributtes
   forma!: FormGroup;
 
@@ -23,8 +22,6 @@ export class ReactiveComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  get f() { return this.forma.controls }
 
   crearFormulario() {
 
@@ -51,7 +48,7 @@ export class ReactiveComponent implements OnInit {
 
   guardar(forma: FormGroup){
 
-    if (forma.invalid) {
+    if (forma.invalid || forma.pending) {
       Object.values(forma.controls).forEach(control => {
         if (control instanceof FormGroup)
           this.guardar(control);
@@ -60,27 +57,29 @@ export class ReactiveComponent implements OnInit {
       return;
     }
     this.forma.reset();
-    this.evento.emit(true);
 
   }
 
   cargarDatosFormulario()  {
+
     this.forma.reset({
       nombre: "sin nombre"
     });
-      ['comer', 'dormir'].forEach(valor => this.pasatiempos.push(this.formBuilder.control(valor)));
+    ['comer', 'dormir'].forEach(valor => this.pasatiempos.push(this.formBuilder.control(valor)));
+
   }
 
-  agregarPasatiempo()
-  {
+  agregarPasatiempo(){
+
     this.pasatiempos.push(this.formBuilder.control(' ', Validators.required));
+
   }
 
-  borrarPasatiempo(index: number)
-  {
+  borrarPasatiempo(index: number){
+
     this.pasatiempos.removeAt(index);
-  }
 
+  }
 
 
   // GETTERS
@@ -102,7 +101,5 @@ export class ReactiveComponent implements OnInit {
     let pass2 = this.forma.get('passwords.pass2')?.value;
     return (pass1 === pass2) ? true : false;
   }
-
-
 
 }

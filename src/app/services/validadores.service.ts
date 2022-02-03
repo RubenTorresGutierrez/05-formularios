@@ -41,7 +41,6 @@ constructor() { }
           resolve({ existe: true });
         resolve (null);
       }, 2000);
-      console.log('hola');
     });
   }
 
