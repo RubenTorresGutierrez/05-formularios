@@ -1,4 +1,6 @@
+<app-navbar></app-navbar>
+<app-modal></app-modal>
 <div class="container mt-5">
-  <router-outlet></router-outlet>
+  <router-outlet (event)="formularioEnviado($event)"></router-outlet>
 </div>
 

@@ -7,12 +7,16 @@ import { TemplateComponent } from './pages/template/template.component';
 import { ReactiveComponent } from './pages/reactive/reactive.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { ModalComponent } from './components/shared/modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TemplateComponent,
-    ReactiveComponent
+    ReactiveComponent,
+    NavbarComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {ValidadoresService} from "../../services/validadores.service";
 
@@ -10,8 +10,9 @@ import {ValidadoresService} from "../../services/validadores.service";
 })
 export class ReactiveComponent implements OnInit {
 
+  @Output() evento = new EventEmitter<boolean>();
   // Atributtes
-  forma!:FormGroup;
+  forma!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private _validadoresService:ValidadoresService) {
 
@@ -22,6 +23,8 @@ export class ReactiveComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  get f() { return this.forma.controls }
 
   crearFormulario() {
 
@@ -57,6 +60,8 @@ export class ReactiveComponent implements OnInit {
       return;
     }
     this.forma.reset();
+    this.evento.emit(true);
+
   }
 
   cargarDatosFormulario()  {
