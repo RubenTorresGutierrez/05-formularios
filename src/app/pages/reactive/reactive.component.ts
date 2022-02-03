@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {ValidadoresService} from "../../services/validadores.service";
+import {ModalComponent} from "../../components/shared/modal/modal.component";
 
 @Component({
   selector: 'app-reactive',
@@ -12,6 +13,7 @@ export class ReactiveComponent implements OnInit {
 
   // Atributtes
   forma!: FormGroup;
+  modal = new ModalComponent();
 
   constructor(private formBuilder: FormBuilder, private _validadoresService:ValidadoresService) {
 
@@ -79,6 +81,10 @@ export class ReactiveComponent implements OnInit {
 
     this.pasatiempos.removeAt(index);
 
+  }
+
+  llamarModal(){
+    this.modal.modal();
   }
 
 

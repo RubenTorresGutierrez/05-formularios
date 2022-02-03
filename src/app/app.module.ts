@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ModalComponent } from './components/shared/modal/modal.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,7 @@ import { ModalComponent } from './components/shared/modal/modal.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
