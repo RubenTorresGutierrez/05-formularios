@@ -55,4 +55,10 @@ export class TemplateComponent implements OnInit {
     }
   }
 
+  actualizarSelect(){
+
+
+
+  }
+
 }
