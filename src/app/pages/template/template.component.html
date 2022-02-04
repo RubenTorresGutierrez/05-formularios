@@ -6,13 +6,15 @@
 
     <!--NOMBRE-->
     <div class="form-group row">
-      <label class="col-2 col-form-label" >Nombre</label>
+      <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
-        <input class="form-control"
-               type="text"
-               placeholder="Nombre" [ngModel]="usuario.nombre.value" #nombre="ngModel"
-               name="nombre" [required]="true" [class.is-invalid]="nombre.invalid && nombre.touched" minlength="{{ usuario.nombre.length }}">
-        <small class="form-text text-danger" *ngIf="nombre.invalid && nombre.touched">Debe contener al menos {{ usuario.nombre.length }} caracteres</small>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input matInput
+                 type="text" [ngModel]="usuario.nombre.value" #nombre="ngModel"
+                 name="nombre" [required]="true" minlength="{{ usuario.nombre.length }}">
+          <mat-error *ngIf="nombre.invalid && nombre.touched">Debe contener al menos {{ usuario.nombre.length }} caracteres</mat-error>
+        </mat-form-field>
       </div>
     </div>
 
@@ -20,24 +22,29 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
-        <input class="form-control"
-               type="text" name="apellido"
-               placeholder="Apellido" [ngModel]="usuario.apellido.value" #apellido="ngModel"
-               [required]="true" [class.is-invalid]="apellido.invalid && apellido.touched" minlength="{{ usuario.apellido.length }}">
-        <small class="form-text text-danger" *ngIf="apellido.invalid && apellido.touched">Debe contener al menos {{ usuario.apellido.length }} caracteres</small>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input matInput
+                 type="text" [ngModel]="usuario.apellido.value" #apellido="ngModel"
+                 name="apellido" [required]="true" minlength="{{ usuario.apellido.length }}">
+          <mat-error *ngIf="apellido.invalid && apellido.touched">Debe contener al menos {{ usuario.apellido.length }} caracteres</mat-error>
+        </mat-form-field>
       </div>
     </div>
+
   </div>
 
   <!--CORREO-->
   <div class="form-group row">
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-8">
-      <input class="form-control"
-             type="email" name="correo"
-             placeholder="Correo electrónico" [ngModel]="usuario.correo" #correo="ngModel"
-             [required]="true" [class.is-invalid]="correo.invalid && correo.touched" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-      <small class="form-text text-danger" *ngIf="correo.invalid && correo.touched">Ajustese al formato de correo</small>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input matInput
+               type="text" [ngModel]="usuario.apellido.value" #correo="ngModel"
+               name="correo" [required]="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+        <mat-error *ngIf="correo.invalid && correo.touched">Ajustese al formato de correo</mat-error>
+      </mat-form-field>
     </div>
   </div>
 
@@ -45,22 +52,43 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">País</label>
     <div class=" col-md-8">
-      <!--Input-->
-      <input type="text" class="form-control" name="buscador" (click)="selectPaises.hidden = false" #buscador
-             (keyup)="actualizarSelect(buscador.value)"
-             [class.is-invalid]="pais.invalid && pais.touched">
-      <!--Select-->
-        <select class="form-control"
-                name="pais"
-                [ngModel]="usuario.pais" #pais="ngModel"
-                [required]="true" #selectPaises [multiple]="true"
-                [disabled]="paises.length===0" [hidden]="true"
-                (click)="selectPaises.hidden = true">
-        <option *ngFor="let pais of paisesBuscados" [value]="pais.alpha3Code" (click)="buscador.value = pais.name">{{ pais.name }}</option>
-      </select>
-      <small class="form-text text-danger" *ngIf="pais.invalid && pais.touched">Elija un país</small>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>País</mat-label>
+        <input type="text"
+               placeholder="Selecciona un país"
+               aria-label="Number"
+               matInput #buscador
+               [matAutocomplete]="auto"
+               (keyup)="actualizarSelect(buscador.value)"
+               [required]="true">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let pais of paisesBuscados" [value]="pais.name">
+            {{ pais.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
   </div>
+
+<!--  <div class="form-group row">-->
+<!--    <label class="col-2 col-form-label">País</label>-->
+<!--    <div class=" col-md-8">-->
+<!--      &lt;!&ndash;Input&ndash;&gt;-->
+<!--      <input type="text" class="form-control" name="buscador" (click)="selectPaises.hidden = false" #buscador-->
+<!--             (keyup)="actualizarSelect(buscador.value)"-->
+<!--             [class.is-invalid]="pais.invalid && pais.touched">-->
+<!--      &lt;!&ndash;Select&ndash;&gt;-->
+<!--        <select class="form-control"-->
+<!--                name="pais"-->
+<!--                [ngModel]="usuario.pais" #pais="ngModel"-->
+<!--                [required]="true" #selectPaises [multiple]="true"-->
+<!--                [disabled]="paises.length===0" [hidden]="true"-->
+<!--                (click)="selectPaises.hidden = true">-->
+<!--        <option *ngFor="let pais of paisesBuscados" [value]="pais.alpha3Code" (click)="buscador.value = pais.name">{{ pais.name }}</option>-->
+<!--      </select>-->
+<!--      <small class="form-text text-danger" *ngIf="pais.invalid && pais.touched">Elija un país</small>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <!--GÉNERO-->
   <div class="form-group row">

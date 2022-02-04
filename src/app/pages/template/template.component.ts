@@ -31,10 +31,12 @@ export class TemplateComponent implements OnInit {
   constructor(private paisService: PaisService) { }
 
   ngOnInit(): void {
-    this.paises.unshift({
-      name: 'Seleccione el país',
-      alpha3Code: ''
-    });
+
+    // this.paises.unshift({
+    //   name: 'Seleccione el país',
+    //   alpha3Code: ''
+    // });
+
     this.paisService.getPaises()
       .subscribe((paises:any) => {
         for ( let i=0; i<paises.length;i++) {
@@ -69,4 +71,5 @@ export class TemplateComponent implements OnInit {
   llamarModal(){
     this.modal.modal();
   }
+
 }
