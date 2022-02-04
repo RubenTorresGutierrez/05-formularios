@@ -8,13 +8,13 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Nombre</label>
       <div class="col-8">
-
-        <input class="form-control"
-               type="text"
-               placeholder="Nombre"
-               formControlName="nombre"
-               [class.is-invalid]="!validar('nombre')">
-        <small *ngIf="!validar('nombre')" class="text-danger">Debe introducir al menos 5 letras</small>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input matInput
+                 type="text"
+                 formControlName="nombre">
+          <mat-error *ngIf="!validar('nombre')">Debe introducir al menos 5 letras</mat-error>
+        </mat-form-field>
       </div>
     </div>
 
@@ -22,68 +22,95 @@
     <div class="form-group row">
       <label class="col-2 col-form-label">Apellido</label>
       <div class="col-8">
-        <input class="form-control"
-               type="text"
-               placeholder="Apellido"
-               formControlName="apellido"
-               [class.is-invalid]="!validar('apellido')">
-        <small *ngIf="!validar('apellido')" class="text-danger">Debe introducir al menos 5 letras</small>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Apellido</mat-label>
+          <input matInput
+                 type="text"
+                 formControlName="apellido">
+          <mat-error *ngIf="!validar('apellido')">Debe introducir al menos 5 letras</mat-error>
+        </mat-form-field>
       </div>
     </div>
+
   </div>
 
   <!--CORREO-->
   <div class="form-group row">
     <label class="col-2 col-form-label">Correo</label>
     <div class="col-8">
-      <input class="form-control"
-             type="email"
-             placeholder="Correo electrónico"
-             formControlName="email"
-             [class.is-invalid]="!validar('email')">
-      <small *ngIf="!validar('email')" class="text-danger">Ajústese al formato de correo</small>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input matInput
+               type="email"
+               formControlName="email"
+               placeholder="Ej. email@ejemplo.com">
+        <mat-error *ngIf="!validar('email')">Ajústese al formato de correo</mat-error>
+      </mat-form-field>
     </div>
   </div>
+
   <hr>
 
   <!--USUARIO-->
   <div class="form-group row">
     <label class="col-2 col-form-label">Usuario</label>
     <div class="col-8">
-      <input class="form-control"
-             type="text"
-             placeholder="Nombre de usuario"
-             formControlName="usuario"
-             [class.is-invalid]="!validar('usuario')" />
-      <small *ngIf="!validar('usuario')" class="text-danger">El nombre de usuario ya existe</small>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Usuario</mat-label>
+        <input matInput
+               type="text"
+               formControlName="usuario">
+        <mat-error *ngIf="!validar('usuario')">El nombre de usuario ya existe</mat-error>
+      </mat-form-field>
     </div>
   </div>
+
   <br>
 
+
+<!--  <div class="form-group row">-->
+<!--    <label class="col-2 col-form-label">Fecha</label>-->
+<!--    <div class="col-8">-->
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>Fecha de Nacimiento</mat-label>-->
+<!--        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento"-->
+<!--               [class.is-invalid]="!validar('email')">-->
+<!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #picker></mat-datepicker>-->
+<!--      </mat-form-field>-->
+<!--      <small *ngIf="!validar('email')" class="text-danger">El nombre de usuario ya existe</small>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <br>-->
+
+
   <!--CONTRASEÑA-->
-    <div class="form-group row" formGroupName="passwords">
-      <label class="col-2 col-form-label">Contraseña</label>
-      <div class="form-row col-8 pr-1">
-        <div class="col">
-          <input type="password"
-                 class="form-control"
-                 placeholder="Contraseña"
+  <div class="form-group row" formGroupName="passwords">
+    <label class="col-2 col-form-label">Contraseña</label>
+    <div class="form-row col-8 pr-1">
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <input matInput
+                 type="password"
                  formControlName="pass1"
-                 [class.is-invalid]="!validar('passwords.pass1')"
                  id="showHide">
+        </mat-form-field>
         </div>
         <div class="col">
-          <input type="password"
-                 class="form-control"
-                 placeholder="Repetir contraseña"
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Repetir contraseña</mat-label>
+          <input matInput
+                 type="password"
                  formControlName="pass2"
-                 [class.is-invalid]="!pass2Valido || !validar('passwords.pass2')"
-                  id="showHide2">
-          <small *ngIf="!pass2Valido" class="text-danger">Las contraseñas no coinciden.</small>
-        </div>
-        <i id="button" class="fas fa-eye show_hide btn btn-outline-secondary float-end mt-2" (click)="showHide()"></i>
+                 id="showHide2">
+          <mat-error *ngIf="!pass2Valido || !validar('passwords.pass2')">Las contraseñas no coinciden</mat-error>
+        </mat-form-field>
       </div>
+      <i id="button" class="fas fa-eye show_hide btn btn-outline-secondary float-end mt-2" (click)="showHide()"></i>
     </div>
+  </div>
+
   <hr>
 
   <!--DIRECCIÓN-->
@@ -91,20 +118,22 @@
     <label class="col-2 col-form-label">Dirección</label>
     <div class="form-row col-8 pr-1">
       <div class="col">
-        <input type="text"
-               class="form-control"
-               placeholder="Distrito"
-               formControlName="distrito"
-               [class.is-invalid]="!validar('direccion.distrito')">
-        <small *ngIf="!validar('direccion.distrito')" class="text-danger">Ajústese al formato</small>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Distrito</mat-label>
+          <input matInput
+                 type="text"
+                 formControlName="distrito">
+          <mat-error *ngIf="!validar('direccion.distrito')">Ajústese al formato</mat-error>
+        </mat-form-field>
       </div>
       <div class="col">
-        <input type="text"
-               class="form-control"
-               placeholder="Ciudad"
-               formControlName="ciudad"
-               [class.is-invalid]="!validar('direccion.ciudad')">
-        <small *ngIf="!validar('direccion.ciudad')" class="text-danger">Ajústese al formato</small>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ciudad</mat-label>
+          <input matInput
+                 type="text"
+                 formControlName="ciudad">
+          <mat-error *ngIf="!validar('direccion.ciudad')">Ajústese al formato</mat-error>
+        </mat-form-field>
       </div>
     </div>
   </div>

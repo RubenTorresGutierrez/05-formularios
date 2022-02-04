@@ -30,7 +30,7 @@ export class ReactiveComponent implements OnInit {
     this.forma = this.formBuilder.group({
       nombre:['',[Validators.required, Validators.minLength(5)]],
       apellido:['',[Validators.required, Validators.minLength(5)]],
-      email:['',[Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+      email:['',[Validators.required, Validators.email]],
       usuario:['', , this._validadoresService.existeUsuario],
       passwords: this.formBuilder.group({
         pass1:['',Validators.required],
