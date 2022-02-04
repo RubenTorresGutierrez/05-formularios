@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {ValidadoresService} from "../../services/validadores.service";
 import {ModalComponent} from "../../components/shared/modal/modal.component";
 
@@ -17,6 +17,8 @@ export class ReactiveComponent implements OnInit {
   //Validadores rango de edad
   minDate: Date;
   maxDate: Date;
+  //Frameworks
+  listaFrameworks: Array<any>;
 
   constructor(private formBuilder: FormBuilder, private _validadoresService:ValidadoresService) {
 
@@ -29,6 +31,14 @@ export class ReactiveComponent implements OnInit {
     this.minDate = new Date(currentYear - 120, 0, 1);
     // Como mínimo puede tener 2 años
     this.maxDate = new Date(currentYear - 2, 0, 1);
+
+    this.listaFrameworks = [
+      {name: 'Angular', value: 'angular'},
+      {name: 'Ember', value: 'ember'},
+      {name: 'Meteor', value: 'meteor'},
+      {name: 'React', value: 'react'},
+      {name: 'Vue', value: 'vue'}
+    ];
 
   }
 
@@ -56,6 +66,7 @@ export class ReactiveComponent implements OnInit {
       }),
       fechaNacimiento:['',Validators.required],
       experiencia:['', Validators.required],
+      frameworks: this.formBuilder.array([]),
       pasatiempos: this.formBuilder.array([])
     }, {
       validators:this._validadoresService.passwordsIguales('pass1', 'pass2')
@@ -126,6 +137,22 @@ export class ReactiveComponent implements OnInit {
 
     this.modal.modal();
 
+  }
+
+  onCheckboxChange(e: any) {
+    const frameworks: FormArray = this.forma.get('frameworks') as FormArray;
+    if (e.target.checked) {
+      frameworks.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      frameworks.controls.forEach((item: any) => {
+        if (item.value == e.target.value) {
+          frameworks.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   /**

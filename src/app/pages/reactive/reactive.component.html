@@ -150,6 +150,18 @@
     </div>
   </div>
 
+  <!--FRAMEWORKS-->
+  <div class="form-group row" formArrayName="frameworks">
+    <label class="col-2 col-form-label">Seleccione los Frameworks que conozca</label>
+    <div class="col-8">
+      <p *ngFor="let framework of listaFrameworks; let i = index">
+        <mat-checkbox (change)="onCheckboxChange($event)"
+        [value]="framework.value">
+          {{ framework.name }}
+        </mat-checkbox>
+      </p>
+    </div>
+  </div>
 
   <!--PASATIEMPO-->
   <div class="row">
