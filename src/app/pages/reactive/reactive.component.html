@@ -70,14 +70,14 @@
   <!--CONTRASEÑA-->
   <div class="form-group row" formGroupName="passwords">
     <label class="col-2 col-form-label">Contraseña</label>
-    <div class="form-row col-8 pr-1">
+    <div class="form-row col-8 pr-1" id="indicador">
       <div class="col">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Contraseña</mat-label>
           <input matInput
                  type="password"
                  formControlName="pass1"
-                 id="showHide">
+                 id="pass1" (keyup)="passStrength()">
         </mat-form-field>
         </div>
         <div class="col">
@@ -86,10 +86,12 @@
           <input matInput
                  type="password"
                  formControlName="pass2"
-                 id="showHide2">
+                 id="pass2">
           <mat-error *ngIf="!pass2Valido || !validar('passwords.pass2')">Las contraseñas no coinciden</mat-error>
         </mat-form-field>
       </div>
+      <i id="iconText" class="fas fa-info-circle float-start me-2"></i>
+      <p id="passText"></p>
       <i id="button" class="fas fa-eye show_hide btn btn-outline-secondary float-end mt-2" (click)="showHide()"></i>
     </div>
   </div>

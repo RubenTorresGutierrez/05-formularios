@@ -160,8 +160,8 @@ export class ReactiveComponent implements OnInit {
    */
   showHide(){
 
-    const input = <HTMLInputElement>document.getElementById('showHide');
-    const input2 = <HTMLInputElement>document.getElementById('showHide2');
+    const input = <HTMLInputElement>document.getElementById('pass1');
+    const input2 = <HTMLInputElement>document.getElementById('pass2');
     const i = <HTMLInputElement>document.getElementById("button");
     if (input.type === "password" && input2.type === "password"){
       input.type = "text";
@@ -172,7 +172,43 @@ export class ReactiveComponent implements OnInit {
       input2.type = "password";
       i.classList.replace("fa-eye-slash","fa-eye");
     }
+  }
+  passStrength(){
+    let alfabeto = /[a-zA-Z]/,
+        numeros = /[0-9]/,
+        caracteres = /[!,@,#,$,%,^,&,*,(,),+,=,~]/;
 
+    const indicador = <HTMLInputElement>document.getElementById("indicador");
+    const input = <HTMLInputElement>document.getElementById('pass1');
+    const passText = <HTMLInputElement>document.getElementById('passText');
+    const iconText = <HTMLInputElement>document.getElementById('iconText');
+
+    let val = input.value;
+    indicador.classList.add("active");
+
+    if(val == ""){
+      indicador.classList.remove("active");
+      passText.innerText="";
+      iconText.style.color= "#ffffff";
+    }
+    //----------------Contrasena debil----------------------------------------
+    if (val.match(alfabeto) || val.match(numeros) || val.match(caracteres)){
+      passText.innerText = "La contraseña es debil";
+      iconText.style.color = "#FF6333";
+      passText.style.color = "#FF6333";
+    }
+    //----------------Contrasena media----------------------------------------
+    if (val.match(alfabeto) && val.match(numeros) && val.length >= 6){
+      passText.innerText = "La contraseña es normal";
+      iconText.style.color = "#cc8500";
+      passText.style.color = "#cc8500";
+    }
+    //----------------Contrasena fuerte----------------------------------------
+    if (val.match(alfabeto) && val.match(numeros) && val.match(caracteres) && val.length >= 8){
+      passText.innerText = "La contraseña es fuerte";
+      iconText.style.color = "#22C32A";
+      passText.style.color = "#22C32A";
+    }
   }
 
   // GETTERS
