@@ -69,16 +69,19 @@
                  class="form-control"
                  placeholder="Contraseña"
                  formControlName="pass1"
-                 [class.is-invalid]="!validar('passwords.pass1')">
+                 [class.is-invalid]="!validar('passwords.pass1')"
+                 id="showHide">
         </div>
         <div class="col">
           <input type="password"
                  class="form-control"
                  placeholder="Repetir contraseña"
                  formControlName="pass2"
-                 [class.is-invalid]="!pass2Valido || !validar('passwords.pass2')">
+                 [class.is-invalid]="!pass2Valido || !validar('passwords.pass2')"
+                  id="showHide2">
           <small *ngIf="!pass2Valido" class="text-danger">Las contraseñas no coinciden.</small>
         </div>
+        <i id="button" class="fas fa-eye show_hide btn btn-outline-secondary float-end mt-2" (click)="showHide()"></i>
       </div>
     </div>
   <hr>

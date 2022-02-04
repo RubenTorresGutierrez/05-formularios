@@ -92,7 +92,7 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="input-group col-md-8">
-      <button type="submit" class="btn btn-outline-primary btn-block rounded">
+      <button type="submit" class="btn btn-outline-primary btn-block rounded" [class.disabled]="!forma.valid" (click)="llamarModal()">
         Guardar
       </button>
       <button type="reset" class="btn btn-outline-danger btn-block ms-3 rounded">Cancelar</button>

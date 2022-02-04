@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+//import {MatButtonModule} from '@angular/material/button';
 import {SwalPortalTargets} from "@sweetalert2/ngx-sweetalert2";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
@@ -38,8 +39,8 @@ export class ModalComponent implements OnInit {
   modal(){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: 'btn btn-success ms-4',
-        cancelButton: 'btn btn-danger'
+        confirmButton: 'btn btn-outline-success ms-4',
+        cancelButton: 'btn btn-outline-danger'
       },
       buttonsStyling: false
     })
@@ -71,7 +72,6 @@ export class ModalComponent implements OnInit {
           title: 'Guardado correctamente'
         })
       } else if (
-        /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
       ) {
         swalWithBootstrapButtons.fire(

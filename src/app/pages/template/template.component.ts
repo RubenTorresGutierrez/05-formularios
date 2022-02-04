@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {PaisService} from "../../services/pais.service";
+import {ModalComponent} from "../../components/shared/modal/modal.component";
 
 @Component({
   selector: 'app-template',
@@ -24,7 +25,7 @@ export class TemplateComponent implements OnInit {
     pais:""
   }
   paises:any[] = [];
-
+  modal = new ModalComponent();
 
   constructor(private paisService: PaisService) { }
 
@@ -61,4 +62,7 @@ export class TemplateComponent implements OnInit {
 
   }
 
+  llamarModal(){
+    this.modal.modal();
+  }
 }
