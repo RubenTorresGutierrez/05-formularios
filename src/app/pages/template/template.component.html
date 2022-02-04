@@ -45,13 +45,18 @@
   <div class="form-group row">
     <label class="col-2 col-form-label">País</label>
     <div class=" col-md-8">
-      <input type="text" class="form-control" name="pais" (click)="selectPaises.hidden = false" #buscador
-             (change)="actualizarSelect()" [required]="true"
-             [ngModel]="usuario.pais" #pais="ngModel"
+      <!--Input-->
+      <input type="text" class="form-control" name="buscador" (click)="selectPaises.hidden = false" #buscador
+             (keyup)="actualizarSelect(buscador.value)"
              [class.is-invalid]="pais.invalid && pais.touched">
-      <select class="form-control selectpicker" [multiple]="true"
-              (click)="selectPaises.hidden = true" #selectPaises [hidden]="true">
-        <option *ngFor="let pais of paises" [value]="pais.alpha3Code" (click)="buscador.value = pais.name">{{ pais.name }}</option>
+      <!--Select-->
+        <select class="form-control"
+                name="pais"
+                [ngModel]="usuario.pais" #pais="ngModel"
+                [required]="true" #selectPaises [multiple]="true"
+                [disabled]="paises.length===0" [hidden]="true"
+                (click)="selectPaises.hidden = true">
+        <option *ngFor="let pais of paisesBuscados" [value]="pais.alpha3Code" (click)="buscador.value = pais.name">{{ pais.name }}</option>
       </select>
       <small class="form-text text-danger" *ngIf="pais.invalid && pais.touched">Elija un país</small>
     </div>

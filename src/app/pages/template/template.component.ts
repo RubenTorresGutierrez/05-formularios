@@ -23,7 +23,8 @@ export class TemplateComponent implements OnInit {
     correo: "",
     pais:""
   }
-  paises:any[] = [];
+  paises: any[] = [];
+  paisesBuscados: any[] = [];
 
 
   constructor(private paisService: PaisService) { }
@@ -35,13 +36,12 @@ export class TemplateComponent implements OnInit {
     });
     this.paisService.getPaises()
       .subscribe((paises:any) => {
-        console.log(paises);
         for ( let i=0; i<paises.length;i++) {
+          // console.log(paises);
           this.paises.push(paises[i]);
+          this.paisesBuscados.push(paises[i]);
         }
       })
-
-
 
   }
 
@@ -53,11 +53,15 @@ export class TemplateComponent implements OnInit {
       })
       return;
     }
+
   }
 
-  actualizarSelect(){
+  actualizarSelect(palabra: string){
 
-
+    this.paisesBuscados = [];
+    for (const pais of this.paises)
+      if(pais.name.toLowerCase().includes(palabra.toLowerCase()))
+        this.paisesBuscados.push(pais);
 
   }
 
