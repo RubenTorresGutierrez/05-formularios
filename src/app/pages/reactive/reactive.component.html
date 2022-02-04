@@ -67,23 +67,6 @@
 
   <br>
 
-
-<!--  <div class="form-group row">-->
-<!--    <label class="col-2 col-form-label">Fecha</label>-->
-<!--    <div class="col-8">-->
-<!--      <mat-form-field appearance="fill">-->
-<!--        <mat-label>Fecha de Nacimiento</mat-label>-->
-<!--        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento"-->
-<!--               [class.is-invalid]="!validar('email')">-->
-<!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--        <mat-datepicker #picker></mat-datepicker>-->
-<!--      </mat-form-field>-->
-<!--      <small *ngIf="!validar('email')" class="text-danger">El nombre de usuario ya existe</small>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  <br>-->
-
-
   <!--CONTRASEÑA-->
   <div class="form-group row" formGroupName="passwords">
     <label class="col-2 col-form-label">Contraseña</label>
@@ -137,6 +120,36 @@
       </div>
     </div>
   </div>
+
+  <!--FECHA NAVIMIENTO-->
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Fecha Nacimiento</label>
+    <div class="col-8">
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate"
+               formControlName="fechaNacimiento">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="!validar('direccion.ciudad')">Este campo es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <hr>
+
+  <!--EXPERIENCIA-->
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Experiencia Programando</label>
+    <div class="col-8">
+        <mat-slider
+          thumbLabel step="1"
+          min="0" max="60"
+          formControlName="experiencia"
+          aria-label="units"
+          class="w-100"></mat-slider>
+    </div>
+  </div>
+
 
   <!--PASATIEMPO-->
   <div class="row">

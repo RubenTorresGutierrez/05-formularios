@@ -11,20 +11,34 @@ import {ModalComponent} from "../../components/shared/modal/modal.component";
 })
 export class ReactiveComponent implements OnInit {
 
-  // Atributtes
+  // Attributes
   forma!: FormGroup;
   modal = new ModalComponent();
+  //Validadores rango de edad
+  minDate: Date;
+  maxDate: Date;
 
   constructor(private formBuilder: FormBuilder, private _validadoresService:ValidadoresService) {
 
     this.crearFormulario()
     this.cargarDatosFormulario()
 
+    // Setear validador de fecha
+    const currentYear = new Date().getFullYear();
+    // Como máximo puede tener 120 años
+    this.minDate = new Date(currentYear - 120, 0, 1);
+    // Como mínimo puede tener 2 años
+    this.maxDate = new Date(currentYear - 2, 0, 1);
+
   }
 
   ngOnInit(): void {
   }
 
+  /**
+   * Genera todos los campos del formulario con
+   * sus respectivos validadores
+   */
   crearFormulario() {
 
     this.forma = this.formBuilder.group({
@@ -40,14 +54,23 @@ export class ReactiveComponent implements OnInit {
         distrito:['',Validators.required],
         ciudad:['',Validators.required]
       }),
+      fechaNacimiento:['',Validators.required],
+      experiencia:['', Validators.required],
       pasatiempos: this.formBuilder.array([])
     }, {
       validators:this._validadoresService.passwordsIguales('pass1', 'pass2')
     })
 
-
   }
 
+  /**
+   * Comprueba si todos los campos están rellenados
+   * y válidos, si no lo están sale de la función e indica
+   * los campos que están mal, si lo están limpia los
+   * valores de todos los campos
+   *
+   * @param forma:FormGroup Formulario entero
+   */
   guardar(forma: FormGroup){
 
     if (forma.invalid || forma.pending) {
@@ -62,6 +85,10 @@ export class ReactiveComponent implements OnInit {
 
   }
 
+  /**
+   * Carga datos por defecto en los campos indicados
+   * del formulario
+   */
   cargarDatosFormulario()  {
 
     this.forma.reset({
@@ -71,23 +98,41 @@ export class ReactiveComponent implements OnInit {
 
   }
 
+  /**
+   * Agrega un campo para introducir un nuevo
+   * pasatiempo
+   */
   agregarPasatiempo(){
 
     this.pasatiempos.push(this.formBuilder.control(' ', Validators.required));
 
   }
 
+  /**
+   * Elimina el pasatiempo elegido por el usuario
+   *
+   * @param index:number Índice del elemento que se elimina
+   */
   borrarPasatiempo(index: number){
 
     this.pasatiempos.removeAt(index);
 
   }
 
+  /**
+   * Llama al método modal() de la clase ModalComponent
+   */
   llamarModal(){
+
     this.modal.modal();
+
   }
 
+  /**
+   * Muestra/oculta el contenido de la contraseña
+   */
   showHide(){
+
     const input = <HTMLInputElement>document.getElementById('showHide');
     const input2 = <HTMLInputElement>document.getElementById('showHide2');
     const i = <HTMLInputElement>document.getElementById("button");
@@ -100,6 +145,7 @@ export class ReactiveComponent implements OnInit {
       input2.type = "password";
       i.classList.replace("fa-eye-slash","fa-eye");
     }
+
   }
 
   // GETTERS
