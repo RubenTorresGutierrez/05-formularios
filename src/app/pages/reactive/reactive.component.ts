@@ -87,6 +87,20 @@ export class ReactiveComponent implements OnInit {
     this.modal.modal();
   }
 
+  showHide(){
+    const input = <HTMLInputElement>document.getElementById('showHide');
+    const input2 = <HTMLInputElement>document.getElementById('showHide2');
+    const i = <HTMLInputElement>document.getElementById("button");
+    if (input.type === "password" && input2.type === "password"){
+      input.type = "text";
+      input2.type = "text";
+      i.classList.replace("fa-eye","fa-eye-slash");
+    }else{
+      input.type = "password";
+      input2.type = "password";
+      i.classList.replace("fa-eye-slash","fa-eye");
+    }
+  }
 
   // GETTERS
 
