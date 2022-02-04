@@ -22,7 +22,10 @@ export class TemplateComponent implements OnInit {
       length: 5
     },
     correo: "",
-    pais:""
+    fecha: "",
+    pais:"",
+    genero:"",
+    experiencia:""
   }
   paises: any[] = [];
   paisesBuscados: any[] = [];
@@ -56,6 +59,7 @@ export class TemplateComponent implements OnInit {
       })
       return;
     }
+    forma.reset();
 
   }
 

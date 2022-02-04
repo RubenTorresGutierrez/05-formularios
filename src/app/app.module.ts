@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ModalComponent } from './components/shared/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AnimationsModule } from "./components/shared/modules/animations/animations.module";
+import { HomeComponent } from './pages/home/home.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AnimationsModule } from "./components/shared/modules/animations/animati
     TemplateComponent,
     ReactiveComponent,
     NavbarComponent,
-    ModalComponent
+    ModalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

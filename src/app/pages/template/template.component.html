@@ -41,9 +41,24 @@
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Correo</mat-label>
         <input matInput
-               type="text" [ngModel]="usuario.apellido.value" #correo="ngModel"
+               type="text" [ngModel]="usuario.correo" #correo="ngModel"
                name="correo" [required]="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
         <mat-error *ngIf="correo.invalid && correo.touched">Ajustese al formato de correo</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <!--FECHA NACIMIENTO-->
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Fecha Nacimiento</label>
+    <div class="col-8">
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" [ngModel]="usuario.fecha" #fecha="ngModel"
+               name="fecha" [required]="true">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="fecha.invalid && fecha.touched">Este campo es obligatorio</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -98,6 +113,21 @@
              class="form-text text-danger">
         Se debe seleccionar un género
       </small>
+    </div>
+  </div>
+
+  <hr>
+
+  <!--EXPERIENCIA-->
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Experiencia Programando</label>
+    <div class="col-8">
+      <mat-slider
+        thumbLabel step="1"
+        min="0" max="60"
+        aria-label="units"
+        class="w-100" [ngModel]="usuario.experiencia" #experiencia="ngModel"
+        name="experiencia"></mat-slider>
     </div>
   </div>
 

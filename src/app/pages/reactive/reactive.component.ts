@@ -66,7 +66,13 @@ export class ReactiveComponent implements OnInit {
       }),
       fechaNacimiento:['',Validators.required],
       experiencia:['', Validators.required],
-      frameworks: this.formBuilder.array([]),
+      frameworks: this.formBuilder.group({
+        angular: false,
+        ember: false,
+        meteor: false,
+        react: false,
+        vue: false
+      }, Validators.required),
       pasatiempos: this.formBuilder.array([])
     }, {
       validators:this._validadoresService.passwordsIguales('pass1', 'pass2')
@@ -92,6 +98,7 @@ export class ReactiveComponent implements OnInit {
       })
       return;
     }
+
     this.forma.reset();
 
   }
@@ -139,22 +146,6 @@ export class ReactiveComponent implements OnInit {
 
   }
 
-  onCheckboxChange(e: any) {
-    const frameworks: FormArray = this.forma.get('frameworks') as FormArray;
-    if (e.target.checked) {
-      frameworks.push(new FormControl(e.target.value));
-    } else {
-      let i: number = 0;
-      frameworks.controls.forEach((item: any) => {
-        if (item.value == e.target.value) {
-          frameworks.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
-  }
-
   /**
    * Muestra/oculta el contenido de la contraseña
    */
@@ -173,6 +164,11 @@ export class ReactiveComponent implements OnInit {
       i.classList.replace("fa-eye-slash","fa-eye");
     }
   }
+
+  /**
+   * Método que realiza la comprobación para que se introduzca
+   * una contraseña segura
+   */
   passStrength(){
     let alfabeto = /[a-zA-Z]/,
         numeros = /[0-9]/,

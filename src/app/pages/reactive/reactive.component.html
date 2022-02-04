@@ -123,7 +123,7 @@
     </div>
   </div>
 
-  <!--FECHA NAVIMIENTO-->
+  <!--FECHA NACIMIENTO-->
   <div class="form-group row">
     <label class="col-2 col-form-label">Fecha Nacimiento</label>
     <div class="col-8">
@@ -137,6 +137,7 @@
       </mat-form-field>
     </div>
   </div>
+
   <hr>
 
   <!--EXPERIENCIA-->
@@ -152,22 +153,26 @@
     </div>
   </div>
 
+  <br />
+
   <!--FRAMEWORKS-->
-  <div class="form-group row" formArrayName="frameworks">
-    <label class="col-2 col-form-label">Seleccione los Frameworks que conozca</label>
+  <div class="form-group row" formGroupName="frameworks">
+    <label class="col-2 col-form-label">Frameworks que domina</label>
     <div class="col-8">
-      <p *ngFor="let framework of listaFrameworks; let i = index">
-        <mat-checkbox (change)="onCheckboxChange($event)"
-        [value]="framework.value">
+      <span class="me-3" *ngFor="let framework of listaFrameworks">
+        <mat-checkbox [formControlName]="framework.value">
           {{ framework.name }}
         </mat-checkbox>
-      </p>
+      </span>
     </div>
   </div>
 
+  <br />
+
   <!--PASATIEMPO-->
   <div class="row">
-    <div class="col-8 offset-2">
+    <label class="col-2 col-form-label">Pasatiempos</label>
+    <div class="col-8">
       <table class="table table-dark table-striped mt-3">
         <thead class="thead-dark">
         <tr>
